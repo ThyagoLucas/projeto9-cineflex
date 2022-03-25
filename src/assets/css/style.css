@@ -1,0 +1,96 @@
+
+
+body{
+  font-family: 'Roboto';
+  font-style: normal;
+  height: 100vh;
+}
+
+.top{
+  position: fixed;
+  top: 0;
+  background-color: #C3CFD9;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: #E8833A;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 40px;
+  padding: 10px;
+}
+main{
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+main h1:first-of-type{
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: #293845;  
+}
+.titles{
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+img{
+  width: 129px;
+  margin-bottom: 25px;
+}
+
+.horario{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  color: #ffffff;
+  width: 83px;
+  height: 43px;
+  margin: 15px 15px 20px 0px;
+  background: #E8833A;  
+  border-radius: 3px;
+}
+.sectionDay{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 25px;
+}
+.sectionDay ul{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.selected{
+  background-color: #8DD7CF;
+  border: 1px solid #1AAE9E;
+}
+.available{
+  background-color: #C3CFD9;
+  border: 1px solid #7B8B99;
+}
+.occupied{
+  background-color: #FBE192;
+  border: 1px solid #F7C52B;
+  pointer-events: none;
+}
+
