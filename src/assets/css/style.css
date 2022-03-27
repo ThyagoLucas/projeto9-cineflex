@@ -1,49 +1,26 @@
 
-
 body{
   font-family: 'Roboto';
   font-style: normal;
   height: 100vh;
   display: flex;
   justify-content: center;
-  
 }
 .root{
   width: 100%;
     position: absolute;
-    background-color: #1AAE9E;
+    
   }
 
-.top{
-  position: relative;
-  
-  background-color: #C3CFD9;
-  
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  color: #E8833A;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 34px;
-  line-height: 40px;
-  padding: 10px;
 
-  
-}
 main{
-  
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 500px;
-  
   padding: 15px;
   margin-bottom: 130px;
 }
-
 main h1:first-of-type{
   font-weight: 400;
   font-size: 24px;
@@ -68,31 +45,6 @@ main img{
   margin-bottom: 25px;
   margin-right: 15px;
 }
-
-.horario{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 10px;
-  color: #ffffff;
-  width: 83px;
-  height: 43px;
-  margin: 15px 15px 20px 0px;
-  background: #E8833A;  
-  border-radius: 3px;
-}
-.sectionDay{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 25px;
-}
-.sectionDay ul{
-  display: flex;
-  flex-direction: row;
-}
-
 
 .selected{
   background-color: #8DD7CF;

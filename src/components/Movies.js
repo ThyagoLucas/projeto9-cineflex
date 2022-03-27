@@ -30,7 +30,6 @@ function Movies(){
 }
 
 function Movie(props){
-
     const {id, title, posterURL, releaseDate} = props.infoMovie;
    
     return(

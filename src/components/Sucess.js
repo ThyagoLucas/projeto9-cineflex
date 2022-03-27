@@ -1,32 +1,47 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-function Sucess(props){
 
-    console.log('sucess', props.datas);
+function Sucess({resume}){
+    const {seat, name, cpf, movie, day, section} = resume;
+    const navigate = useNavigate();
 
-    
-    
-
-
+    function toHome(){
+        navigate('/');
+    }
+  
     return(
-        
-
-            <ResumeReservation>
-                
-                <h1>Pedido feito com sucesso</h1>
+        <ResumeReservation>
+            <h1>Pedido feito com sucesso</h1>
+            <div>
                 <h2>Filme e sessão</h2>
+                <p>{movie}</p>
+                <p>{day} {section}</p>
+            </div>
 
-                <h3></h3>
-            </ResumeReservation>
+            <div>
+                <h2>Ingressos</h2>
+                {resume.seat.map((number, index)=> <SeatsReservation key={index} number={number}/>)}
+            </div>
 
-      
-        
+            <div>
+                <h2>Comprador</h2>
+                <p>Nome: {name}</p>
+                <p>CPF: {cpf}</p>
+            </div>
+
+            <button onClick={()=>toHome()}>Voltar para home </button>
+            
+        </ResumeReservation>       
     )
+}
 
-
+function SeatsReservation({number}){
+    return(
+        <p>Assento {number}</p>
+    );
 }
 
 //styles
-
 
 const ResumeReservation = styled.div `
 
@@ -34,7 +49,7 @@ const ResumeReservation = styled.div `
     flex-direction: column;
     width: 100%;
     height: 100%;
-    margin-top: 80px;
+    margin-top: 30px;
 
         h1{
             dispay:flex;
@@ -49,17 +64,24 @@ const ResumeReservation = styled.div `
             text-align: center;
             letter-spacing: 0.04em;
             padding: 0% 25% 0% 25%;
+            margin-bottom: 15px;
         }
         h2{
             font-weight: 700;
-            font-size: 18px;
+            font-size: 20px;
+           
             margin-top: 20px;
             padding: 10px;
             color: #293845;
         }
+        p{
+            margin:5px 0px 10px 10px;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 26px;
+            color: #293845;
+        }
 
 `
-
-
 
 export default Sucess;
