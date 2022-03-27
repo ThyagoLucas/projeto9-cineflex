@@ -34,7 +34,7 @@ function Movie(props){
     const {id, title, posterURL, releaseDate} = props.infoMovie;
    
     return(
-        <Link to={`/horarios-disponiveis/${id}` }>
+        <Link to={`/sessoes/${id}` }>
             <img src={posterURL} alt={`Imagem do filme ${title}`}/>
         </Link>
     );

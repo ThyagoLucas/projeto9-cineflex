@@ -5,12 +5,12 @@ import api from "./api";
 
 function AvailableTime(){
 
-    const {movieId} = useParams();
+    const {idFilme} = useParams();
     const [section, setHorarios] = useState([]);
     
     useEffect(() => {
         api
-            .get(`/movies/${movieId}/showtimes`)
+            .get(`/movies/${idFilme}/showtimes`)
             .then ((response) => setHorarios(response.data))
             .catch((err) => console.log("ops! ocorreu um erro", err));
     } , []);
@@ -23,7 +23,7 @@ function AvailableTime(){
             <h1>Selecione o horário</h1>
             {days.map(infoSectionsDay => (
                 <InfoSetion infoSetions = {infoSectionsDay}/>
-            ))};
+            ))}
 
         </main>
         <Footer title={title} img = {posterURL} />
@@ -32,7 +32,7 @@ function AvailableTime(){
     <>
     <h1>jequiti</h1>
     
-    </>;
+    </>
 }
 
 function InfoSetion(props){
@@ -47,21 +47,18 @@ function InfoSetion(props){
                 {showtimes.map(time => (
                     <Times time={time}/>
                 ))}
-               
             </ul>
         </div>
     )
 }
-
 function Times(props){
     const {name, id} = props.time;
-    //console.log(props.time);
+    
     return(
-        <Link to={`/available-seats/${id}`}>
+        <Link to={`/assentos/${id}`}>
             <li className="horario">{name}</li>
         </Link>
     );
-
 }
 
 export default AvailableTime;

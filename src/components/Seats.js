@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
 import api from './api';
@@ -6,21 +6,24 @@ import api from './api';
 import styled from 'styled-components';
 import Footer from './Footer';
 
-function Seats (){
+function Seats ({setSeat, setDatas, infosUser}){
     const objectModel = {
                         name:'',
                         day: {id:'', weekday:'', date:''},
                         movie: {title:'', posterURL:''},
                         seats:[]};
     
-    const {sectionId} = useParams();
-    const [infoSeats , setInfoSeats] = useState(objectModel); 
+    const {idSessao} = useParams();
+    const [infoSeats , setInfoSeats] = useState(objectModel);
+   
+
     useEffect(() => {
         api 
-            .get(`/showtimes/${sectionId}/seats`)
+            .get(`/showtimes/${idSessao}/seats`)
             .then(response => setInfoSeats(response.data))
             .catch(err => alert('falhou, segue erro: ', err));
     },[]);
+
 
     const {name:horario,day:{id, weekday, date},movie:{title, posterURL}, seats} = infoSeats;
 
@@ -29,11 +32,15 @@ function Seats (){
         <main>
             <h1>Selecione o(s) assento(s)</h1>
             <DivSeats>
-            {seats.map((seatStatus, index)=> <Seat key={index} seatStatus={seatStatus}/>)} 
+            {seats.map((seatStatus, index)=> <Seat 
+                    key={index}
+                    seatStatus={seatStatus}
+                    setSeat={setSeat}
+                    />)} 
             </DivSeats>
-            <InfoStates  />
+            <InfoStates />
 
-            <Imputs />
+            <Inputs setDatas={setDatas} infosUser={infosUser}/>
         </main>
         
      <Footer title={title} img = {posterURL} day={weekday} section={horario}/>
@@ -44,30 +51,55 @@ function Seats (){
 function Seat(props){
     
     const {id, name:seat,isAvailable} = props.seatStatus;
-    
-    
-    console.log("imprime",id, seat, isAvailable);
+    const [selected, setselected] = useState(false);
 
-    return isAvailable ?(
-       <h2 className='available'>{seat}</h2> 
-    ):
-    (<h2 className='occupied'>{seat}</h2> )
+    function toggle(value){
+        value = Number (value);
+        props.setSeat(value);
+        !selected ? setselected(true):setselected(false);
+    }
+    const status = `${selected ? 'selected':'available'}`;
+
+    return isAvailable ? (
+       <h2 className={status} onClick={()=>toggle(id)}>{seat}</h2> 
+    ):(<h2 className='occupied' onClick={()=>alert('Esse assento não está disponível')}>{seat}</h2> );
 }
 
-function Imputs(){
+function Inputs({setDatas, infosUser}){
 
+    const navigate = useNavigate();
+
+    console.log(infosUser);
+    function sendReservation(event){
+        event.preventDefault();
+
+        infosUser.ids.length !== 0 ?
+            api
+                .post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', infosUser)
+                .then(() => {
+                    alert('Shoow! Fizemos sua reserva :)');
+                    navigate('/sucess');
+                })
+                .catch(err =>(console.log("Erro foi esse aqui",err)))
+        
+            :alert('Selecione ao menos 1 assento');
+
+    }
+    
 
 
     return(
-       <InputNameAndCpf>
+       <InputNameAndCpf onSubmit={sendReservation}>
             <h3>Nome do Comprador</h3>
-            <input placeholder={`Digite seu nome...`}></input>
+            <input placeholder='Digite seu nome...' required onChange={e=> setDatas({...infosUser, name:e.target.value})}></input>
 
             <h3>CPF do comprador:</h3>
-            <input placeholder={`Digite seu CPF...`}></input>
-            <button> enviar </button>
+            <input placeholder='Digite seu CPF...' onChange={e=> setDatas({...infosUser, cpf:e.target.value})}></input>
+           
+            <button type='submit' > enviar </button>
+            
+            
        </InputNameAndCpf>
-      
     )
 }
 
@@ -94,7 +126,6 @@ function InfoStates(){
 }
 
 //Style
-
 const DivSeats = styled.div`
 
     display:flex;
@@ -147,7 +178,7 @@ const DivInfoStatus = styled.div`
             margin-bottom: 3px;
           }
 `
-const InputNameAndCpf = styled.div`
+const InputNameAndCpf = styled.form`
     display:flex;
     flex-direction: column;
     color: #293845;
@@ -157,7 +188,6 @@ const InputNameAndCpf = styled.div`
     h3{
         display:flex;
         align-items-flex;
-        
     }
 
     input{
@@ -166,6 +196,7 @@ const InputNameAndCpf = styled.div`
         font-size: 15px;
         line-height: 21px;
         margin: 3px 0px 20px;
+        padding: 10px;
     }
 
 `
