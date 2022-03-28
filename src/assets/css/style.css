@@ -7,12 +7,10 @@ body{
   justify-content: center;
 }
 .root{
-  width: 100%;
+    width: 100%;
     position: absolute;
     
-  }
-
-
+}
 main{
   display: flex;
   flex-direction: column;
@@ -47,15 +45,15 @@ main img{
 }
 
 .selected{
-  background-color: #8DD7CF;
-  border: 1px solid #1AAE9E;
+  background-color: #5bdb61;
+  border: 1px solid #26ae1a;
 }
 .available{
   background-color: #C3CFD9;
   border: 1px solid #7B8B99;
 }
 .occupied{
-  background-color: #FBE192;
+  background-color: #ebd55d;
   border: 1px solid #F7C52B;
 }
 

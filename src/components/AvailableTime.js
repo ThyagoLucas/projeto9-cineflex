@@ -10,7 +10,7 @@ function AvailableTime(){
 
     const {idFilme} = useParams();
     const [section, setHorarios] = useState([]);
-    const {id, title, posterURL, releaseDate, days} = section;
+    const {title, posterURL, days} = section;
     
     useEffect(() => {
         api
@@ -19,12 +19,12 @@ function AvailableTime(){
             .catch((err) => console.log("ops! ocorreu um erro", err));
     } , []);
     
-    return section.length != 0 ? (
+    return section.length !== 0 ? (
         <>
         <main>
             <h1>Selecione o horário</h1>
-            {days.map(infoSectionsDay => (
-                <InfoSetion infoSetions = {infoSectionsDay}/>
+            {days.map((infoSectionsDay, index) => (
+                <InfoSetion key={index} infoSetions = {infoSectionsDay}/>
             ))}
         </main>
         <Footer title={title} img = {posterURL} />
@@ -41,7 +41,7 @@ function InfoSetion(props){
         <SectionDay >
             <div>
                 <h2>{weekday}</h2>
-                <h2>{date}</h2>
+                <h3>{date}</h3>
             </div>
             
             <ul>
@@ -69,6 +69,14 @@ function Times(props){
     width: 100%;
     margin-top: 25px;
 
+    div{
+        color:#293845;
+        display:flex;
+        flex-direction: row;
+    }
+    h3{
+        margin-left: 8px;
+    }
     ul{
         display: flex;
         flex-direction: row;

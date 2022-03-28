@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
+
 import styled from "styled-components";
 
 function Sucess({resume}){
-    const {seat, name, cpf, movie, day, section} = resume;
+    const {name, cpf, movie, day, section} = resume;
     const navigate = useNavigate();
 
     function toHome(){
@@ -29,7 +30,9 @@ function Sucess({resume}){
                 <p>CPF: {cpf}</p>
             </div>
 
+            <div className="button">
             <button onClick={()=>toHome()}>Voltar para home </button>
+            </div>
             
         </ResumeReservation>       
     )
@@ -72,7 +75,7 @@ const ResumeReservation = styled.div `
            
             margin-top: 20px;
             padding: 10px;
-            color: #293845;
+            color: black;
         }
         p{
             margin:5px 0px 10px 10px;
@@ -80,6 +83,23 @@ const ResumeReservation = styled.div `
             font-size: 18px;
             line-height: 26px;
             color: #293845;
+        }
+        .button{
+            display:flex;
+            justify-content: center;
+            margin-top: 60px;
+        }
+        button{
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 21px;
+            color:#FFFFFF;
+            background: #E8833A;
+            border-radius: 3px;
+            width: 225px;
+            height: 42px;
         }
 
 `

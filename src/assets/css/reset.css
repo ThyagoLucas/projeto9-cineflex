@@ -47,3 +47,11 @@ table {
 strong {
 	font-weight: bold;
 }
+
+button{
+	border:none;
+}
+
+input{
+	outline: none;
+}

@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-
 
 import Movies from "./Movies";
 import AvailableTime from "./AvailableTime";
@@ -12,13 +11,12 @@ import Header from "./Header";
 function App(){
 
     const [infosUser, setInfos] = useState({ ids:[], name:'', cpf:''});
-   
     const [resume, setResume] = useState({seat:[], name:'', cpf:'', movie:'', day:'', section:''});
-
-    console.log('Resumo',resume);
     
     function SetSeat(numberSeat,value){
+        
         const thereIs  = infosUser.ids.indexOf(value);
+        
         if(thereIs === -1){
             setInfos({...infosUser, ids:[...infosUser.ids, value]});
             resume.seat.push(numberSeat);
@@ -35,22 +33,19 @@ function App(){
     return(
         <>
         <BrowserRouter>
-            <Header/>
-            <Routes>
-                <Route path="/" element={<Movies />}></Route>
-                <Route path="/sessoes/:idFilme" element={<AvailableTime />}></Route>
-                <Route path="/assentos/:idSessao" element={<Seats   setSeat={SetSeat} 
-                                                                    setDatas={setInfos}
-                                                                    infosUser={infosUser}
-                                                                    resume={resume}
-                                                                    setResume={setResume}/>} ></Route>
-                <Route path="/sucess" element={<Sucess resume={resume}/>}></Route>
-            </Routes>
-            
+        <Header/>
+        <Routes>
+            <Route path="/" element={<Movies />}></Route>
+            <Route path="/sessoes/:idFilme" element={<AvailableTime />}></Route>
+            <Route path="/assentos/:idSessao" element={<Seats   setSeat={SetSeat} 
+                                                                setDatas={setInfos}
+                                                                infosUser={infosUser}
+                                                                resume={resume}
+                                                                setResume={setResume}/>} ></Route>
+            <Route path="/sucess" element={<Sucess resume={resume}/>}></Route>
+        </Routes>
         </BrowserRouter>
-       
         </>
-    
     );
 }
 

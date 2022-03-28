@@ -13,15 +13,14 @@ function Seats ({setSeat, setDatas, infosUser, resume, setResume}){
     
     const {idSessao} = useParams();
     const [infoSeats , setInfoSeats] = useState(objectModel);
-    const {name:horario,day:{id, weekday, date},movie:{title, posterURL}, seats} = infoSeats;
 
+    const {name:horario,day:{ weekday },movie:{title, posterURL}, seats} = infoSeats;
 
     useEffect(() => {
         api 
             .get(`/showtimes/${idSessao}/seats`)
             .then(response => {
                 setInfoSeats(response.data)
-                console.log("infoResponse",response.data);
                 setResume({...resume,   movie: response.data.movie.title,
                                         day: response.data.day.date,
                                         section: response.data.name});
@@ -34,18 +33,12 @@ function Seats ({setSeat, setDatas, infosUser, resume, setResume}){
         <main>
             <h1>Selecione o(s) assento(s)</h1>
             <DivSeats>
-                {seats.map((seatStatus, index)=> <Seat 
-                    key={index}
-                    seatStatus={seatStatus}
-                    setSeat={setSeat}
-                    />)} 
-                   
+                {seats.map((seatStatus, index)=> <Seat  key={index} seatStatus={seatStatus}setSeat={setSeat}/>)}
             </DivSeats>
             <InfoStates /> 
-
             <Inputs setDatas={setDatas} infosUser={infosUser} resume={resume} setResume={setResume}/>
         </main>
-     <Footer title={title} img = {posterURL} day={weekday} section={horario}/>
+        <Footer title={title} img = {posterURL} day={weekday} section={horario}/>
     </>
     );
 }
@@ -65,37 +58,36 @@ function Seat(props){
         !selected ? setselected(true):setselected(false);
     }
     
-    return isAvailable ? (
+    return isAvailable ? 
        <h2 className={status} onClick={()=>toggle(seat,id)}>{seat}</h2> 
-    ):
-    (<h2 className='occupied' onClick={()=>alert('Esse assento não está disponível')}>{seat}</h2> );
+    :
+      <h2 className='occupied' onClick={()=>alert('Esse assento não está disponível')}>{seat}</h2> 
 }
 
 function InfoStates(){
     return(
         <DivInfoStatus className='infoStatus'>
             <div>
-                <h1 className='selected'></h1>
-                <h2>Selecionado</h2>
+                <h2 className='selected'></h2>
+                <h3>Selecionado</h3>
             </div>
 
             <div >
-                <h1 className='available'></h1>
-                <h2>Disponível</h2>
+                <h2 className='available'></h2>
+                <h3>Disponível</h3>
             </div>
 
             <div>
-                <h1 className='occupied'></h1>
-                <h2>Indiponível</h2>
+                <h2 className='occupied'></h2>
+                <h3>Indiponível</h3>
             </div>
         </DivInfoStatus>
             
     )
 }
 
-//Style
+//Styleds
 const DivSeats = styled.div`
-
     display:flex;
     align-items: center;
     justify-content: center;
@@ -136,7 +128,7 @@ const DivInfoStatus = styled.div`
             flex-direction: column;
             margin: 10px;   
         }
-        div h1{
+        div h2{
             width: 20px;
             height: 20px;
             border-radius: 50%;
