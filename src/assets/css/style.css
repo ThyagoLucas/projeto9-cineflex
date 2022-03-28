@@ -10,6 +10,7 @@ body{
     width: 100%;
     position: absolute;
     
+    
 }
 main{
   display: flex;
@@ -17,6 +18,7 @@ main{
   align-items: center;
   max-width: 500px;
   padding: 15px;
+  margin-top: 70px;
   margin-bottom: 130px;
 }
 main h1:first-of-type{
@@ -57,4 +59,13 @@ main img{
   border: 1px solid #F7C52B;
 }
 
-
+@media (min-width: 500px){
+  .root{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+  }
+  
+}

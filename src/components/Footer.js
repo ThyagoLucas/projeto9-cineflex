@@ -4,14 +4,17 @@ function Footer(porps){
     const {title, img, day, section} = porps;
     return(
         <StyledFooter >
-            <img src={img} alt={`Imagem do filme ${title}`}/>
-            <div>
-                <h1>{title}</h1> 
-                <div className='text'>
-                    <h2>{day}</h2>
-                    <h2>{section}</h2>
-                </div>
-            </div>         
+                
+                <img src={img} alt={`Imagem do filme ${title}`}/>
+                <div>
+                    <h1>{title}</h1> 
+                    <div className='text'>
+                        <h2>{day}</h2>
+                        <h2>{section}</h2>
+                    </div>
+                </div>    
+          
+                 
         </StyledFooter>
     );
 }
@@ -53,6 +56,11 @@ const StyledFooter = styled.footer`
         display:flex;
 
     }
+    @media (min-width: 500px){
+        
+            width:500px;
+            padding:0px;
+      }
     
 `
 export default Footer;

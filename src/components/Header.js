@@ -10,7 +10,8 @@ function Header(){
 
 const Top = styled.div `
 
-    position: relative;
+    position: fixed;
+    width:100%;
     background-color: #C3CFD9;
     display: flex;
     align-items: center;
